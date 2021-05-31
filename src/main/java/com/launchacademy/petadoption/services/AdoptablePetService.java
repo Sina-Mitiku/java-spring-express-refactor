@@ -3,8 +3,9 @@ package com.launchacademy.petadoption.services;
 import com.launchacademy.petadoption.controllers.PetsApiController;
 
 import com.launchacademy.petadoption.models.AdoptablePet;
-import com.launchacademy.petadoption.models.PetType;
 import com.launchacademy.petadoption.repositories.AdoptablePetRepository;
+import java.util.List;
+import java.util.Optional;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,8 +38,12 @@ public class AdoptablePetService {
     }
   }
 
-  public AdoptablePet findById(Integer id) {
-    return this.adoptablePetRepo.findById(id).orElseThrow(() -> new PetNotFoundException());
+  public List<AdoptablePet> findByPetTypeId(Integer petTypeId) {
+    return this.adoptablePetRepo.findByPetTypeId(petTypeId);
   }
 
+  public AdoptablePet findByAnimalId(Integer petTypeId, Integer animalId) {
+    Optional<AdoptablePet> pet = Optional.ofNullable(adoptablePetRepo.findByAnimalId(petTypeId, animalId));
+    return pet.orElseThrow(() -> new PetNotFoundException());
+  }
 }

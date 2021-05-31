@@ -41,27 +41,32 @@ private SurrenderApplicationService surrenderApplicationService;
     return petService.findAll();
   }
 
-  @GetMapping("pets/{type}")
-  public List<AdoptablePet> getPetsList(@PathVariable String type) {
-    return petService.findByTypeIgnoreCase(type).getAdoptablePets();
+//  @GetMapping("pets/{type}")
+//  public List<AdoptablePet> getPetsList(@PathVariable String type) {
+//    return petService.findByType(type).getAdoptablePets();
+//  }
+
+  @GetMapping("pets/{petTypeId}")
+  public List<AdoptablePet> getPetsList(@PathVariable Integer petTypeId) {
+    return adoptablePetService.findByPetTypeId(petTypeId);
   }
 
-  @GetMapping("pets/{type}/{animalId}")
-  public AdoptablePet showOnePet(@PathVariable Integer animalId) {
-    return adoptablePetService.findById(animalId);
+  @GetMapping("pets/{petTypeId}/{animalId}")
+  public AdoptablePet showOnePet(@PathVariable Integer petTypeId, @PathVariable Integer animalId) {
+   return adoptablePetService.findByAnimalId(petTypeId, animalId);
     }
-
-    @PostMapping("/application")
-  public ResponseEntity createApplication(@RequestBody AdoptionApplication adoptionApplication) {
-      AdoptionApplication newAdoptionApplication = new AdoptionApplication();
-      newAdoptionApplication.setName(adoptionApplication.getName());
-      newAdoptionApplication.setPhoneNumber(adoptionApplication.getPhoneNumber());
-      newAdoptionApplication.setEmail(adoptionApplication.getEmail());
-      newAdoptionApplication.setHomeStatus(adoptionApplication.getHomeStatus());
-      newAdoptionApplication.setApplicationStatus("pending");
-      newAdoptionApplication.setAdoptablePet(adoptablePetService.findById(adoptionApplication.getPetId()));
-      return new ResponseEntity(adoptionApplicationService.adopt(newAdoptionApplication), HttpStatus.OK);
-    }
+//save adoption application - it is working
+//    @PostMapping("/application")
+//  public ResponseEntity createApplication(@RequestBody AdoptionApplication adoptionApplication) {
+//      AdoptionApplication newAdoptionApplication = new AdoptionApplication();
+//      newAdoptionApplication.setName(adoptionApplication.getName());
+//      newAdoptionApplication.setPhoneNumber(adoptionApplication.getPhoneNumber());
+//      newAdoptionApplication.setEmail(adoptionApplication.getEmail());
+//      newAdoptionApplication.setHomeStatus(adoptionApplication.getHomeStatus());
+//      newAdoptionApplication.setApplicationStatus("pending");
+//      newAdoptionApplication.setAdoptablePet(adoptablePetService.findById(adoptionApplication.getPetId()));
+//      return new ResponseEntity(adoptionApplicationService.adopt(newAdoptionApplication), HttpStatus.OK);
+//    }
 
   }
 

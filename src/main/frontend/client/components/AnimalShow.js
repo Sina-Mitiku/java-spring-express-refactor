@@ -6,7 +6,6 @@ const AnimalShow = props => {
   const [animal, setAnimal] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [afterSubmission, setAfterSubmission] = useState(false)
-  const [showResponse, setShowResponse] = useState(null)
 
   const getAnimal = async () => {
     try {
@@ -64,6 +63,7 @@ const AnimalShow = props => {
     )
   }
 
+
   return (
     <div>
       <div className="animal-show">
@@ -85,6 +85,7 @@ const AnimalShow = props => {
       <br/>
     </div>
   )
+
 }
 
 export default AnimalShow

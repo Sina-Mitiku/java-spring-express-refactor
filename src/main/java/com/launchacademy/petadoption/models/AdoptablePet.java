@@ -59,7 +59,7 @@ public class AdoptablePet {
     this.petType = petType;
   }
 
-  @OneToMany(fetch= FetchType.LAZY, mappedBy = "adoptablePet")
+  @OneToMany(mappedBy = "adoptablePet")
   @JsonIgnoreProperties("adoptablePet")
   private List<AdoptionApplication> adoptionApplications = new ArrayList<>();
 }

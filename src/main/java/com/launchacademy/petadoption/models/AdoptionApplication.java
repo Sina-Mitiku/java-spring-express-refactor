@@ -2,6 +2,7 @@ package com.launchacademy.petadoption.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @NoArgsConstructor
 @Getter
@@ -43,8 +46,9 @@ public class AdoptionApplication {
   @Column(name="pet_id", updatable = false, insertable = false)
   private int petId;
 
-  @ManyToOne
-  @JoinColumn(name="pet_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name="pet_id", insertable = false, updatable = false)
+  @Fetch(FetchMode.JOIN)
   private AdoptablePet adoptablePet;
 
   public void setAdoptablePet(AdoptablePet adoptablePet) {

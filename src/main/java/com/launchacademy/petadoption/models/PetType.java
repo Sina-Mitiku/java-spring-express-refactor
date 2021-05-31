@@ -38,7 +38,7 @@ public class PetType {
   @Column(name="description", nullable=false)
   private String description;
 
-  @OneToMany(fetch= FetchType.LAZY, mappedBy = "petType", cascade = CascadeType.ALL)
+  @OneToMany(fetch=FetchType.LAZY, mappedBy = "petType")
   @JsonIgnoreProperties("petType")
   private List<AdoptablePet> adoptablePets = new ArrayList<>();
 
